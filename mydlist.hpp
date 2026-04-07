@@ -1,5 +1,3 @@
-#include <iostream>
-
 template<typename T>
 class MyNode
 {
@@ -26,9 +24,9 @@ private:
 	int isize;
 
 public:
-	MyDoublyLinkedList()
+	MyDoublyLinkedList() : head(nullptr), tail(nullptr), isize(0)
 	{
-		// dev: allocate sentinels; empty list is head <-> tail
+		// dev: sentinels only; empty list is head <-> tail (O(1) setup)
 		head = new MyNode<T>();
 		tail = new MyNode<T>();
 		head->set(nullptr);
@@ -37,21 +35,15 @@ public:
 		head->setPrev(nullptr);
 		tail->setPrev(head);
 		tail->setNext(nullptr);
-		isize = 0;
 	}
 
 	~MyDoublyLinkedList()
 	{
-		// dev: remove all data nodes between sentinels, then sentinels
-		MyNode<T>* cur = head->getNext();
-		while (cur != tail)
+		// dev: single forward walk; delete nullptr is well-defined (no extra branch)
+		for (MyNode<T>* cur = head->getNext(); cur != tail; )
 		{
 			MyNode<T>* next = cur->getNext();
-			T* elem = cur->get();
-			if (elem != nullptr)
-			{
-				delete elem;
-			}
+			delete cur->get();
 			delete cur;
 			cur = next;
 		}
@@ -72,20 +64,14 @@ public:
 
 	MyNode<T>* getHeadNode()
 	{
-		if (isEmpty())
-		{
-			return nullptr;
-		}
-		return head->getNext();
+		MyNode<T>* n = head->getNext();
+		return (n == tail) ? nullptr : n;
 	}
 
 	MyNode<T>* getTailNode()
 	{
-		if (isEmpty())
-		{
-			return nullptr;
-		}
-		return tail->getPrev();
+		MyNode<T>* n = tail->getPrev();
+		return (n == head) ? nullptr : n;
 	}
 
 	void addToHead(T* in)
@@ -102,7 +88,7 @@ public:
 
 	void removeFromHead()
 	{
-		if (isEmpty())
+		if (head->getNext() == tail)
 		{
 			return;
 		}
@@ -110,11 +96,7 @@ public:
 		MyNode<T>* next = first->getNext();
 		head->setNext(next);
 		next->setPrev(head);
-		T* elem = first->get();
-		if (elem != nullptr)
-		{
-			delete elem;
-		}
+		delete first->get();
 		delete first;
 		isize--;
 	}
@@ -134,7 +116,7 @@ public:
 
 	void removeFromTail()
 	{
-		if (isEmpty())
+		if (tail->getPrev() == head)
 		{
 			return;
 		}
@@ -142,11 +124,7 @@ public:
 		MyNode<T>* prev = last->getPrev();
 		tail->setPrev(prev);
 		prev->setNext(tail);
-		T* elem = last->get();
-		if (elem != nullptr)
-		{
-			delete elem;
-		}
+		delete last->get();
 		delete last;
 		isize--;
 	}
