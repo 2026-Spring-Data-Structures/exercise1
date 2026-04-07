@@ -28,6 +28,8 @@ private:
 public:
 	MyDoublyLinkedList()
 	{
+		this->head = new MyNode<T>();
+		this->tail = new MyNode<T>();
 	}
 
 	~MyDoublyLinkedList()
@@ -36,10 +38,12 @@ public:
 
 	bool isEmpty()
 	{
+		return true;
 	}
 
 	int getSize()
 	{
+		return 0;
 	}
 
 
@@ -57,6 +61,7 @@ public:
 
 	void removeFromHead()
 	{
+		
 	}
 
 
