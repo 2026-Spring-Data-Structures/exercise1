@@ -66,31 +66,39 @@ public:
 		MyNode<T> *newNode = new MyNode<T>();
 		newNode->set(in);
 		newNode->setNext(head->getNext());
+		head->getNext()->setPrev(newNode);
 		head->setNext(newNode);
 		newNode->setPrev(head);
-		isize += 1;
+		isize++;
 	}
 
 	void removeFromHead()
 	{
-		head->setNext(head->getNext()->getNext());
-		isize -= 1;
+		MyNode<T>* temp = head->getNext();
+		head->setNext(temp->getNext());
+		temp->getNext()->setPrev(head);
+		delete temp;
+		isize--;
 	}
 
 
 	void addToTail(T* in)
 	{
 		MyNode<T> *newNode = new MyNode<T>();
-		newNode.set(in);
+		newNode->set(in);
 		newNode->setPrev(tail->getPrev());
+		tail->getPrev()->setNext(newNode);
 		tail->setPrev(newNode);
 		newNode->setNext(tail);
-		isize += 1;
+		isize++;
 	}
 
 	void removeFromTail()
 	{
-		tail->setPrev(tail->getPrev()->getPrev());
-		isize -= 1;
+		MyNode<T> *temp = tail->getPrev();
+		tail->setPrev(temp->getPrev());
+		temp->getPrev()->setNext(tail);
+		delete temp;
+		isize--;
 	}
 };
