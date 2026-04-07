@@ -36,6 +36,9 @@ public:
 
 	~MyDoublyLinkedList()
 	{
+		while (!isEmpty()) {
+			removeFromHead();
+		}
 		delete head;
 		delete tail;
 	}
@@ -74,6 +77,7 @@ public:
 
 	void removeFromHead()
 	{
+		if (isEmpty()) return;
 		MyNode<T>* temp = head->getNext();
 		head->setNext(temp->getNext());
 		temp->getNext()->setPrev(head);
@@ -95,6 +99,7 @@ public:
 
 	void removeFromTail()
 	{
+		if (isEmpty()) return;
 		MyNode<T> *temp = tail->getPrev();
 		tail->setPrev(temp->getPrev());
 		temp->getPrev()->setNext(tail);
