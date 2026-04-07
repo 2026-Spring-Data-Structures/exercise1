@@ -28,44 +28,67 @@ private:
 public:
 	MyDoublyLinkedList()
 	{
+		head = nullptr;
+		tail = nullptr;
+		head->setNext(tail);
+		tail->setPrev(head);
 	}
 
 	~MyDoublyLinkedList()
 	{
+		delete head;
+		delete tail;
 	}
 
 	bool isEmpty()
 	{
-		return true;
+		return getSize() == 0;
 	}
 
 	int getSize()
 	{
+		return isize;
 	}
 
 
 	MyNode<T>* getHeadNode()
 	{
+		return head->getNext();
 	}
 
 	MyNode<T>* getTailNode()
 	{
+		return tail->getPrev();
 	}
 
 	void addToHead(T* in)
 	{
+		MyNode<T> newNode = new MyNode<T>();
+		newNode.set(in);
+		head->setNext(newNode);
+		isize += 1;
 	}
 
 	void removeFromHead()
 	{
+		MyNode<T> temp = head->getNext()->getNext();
+		head->setNext(temp);
+		isize -= 1;
 	}
 
 
 	void addToTail(T* in)
 	{
+		MyNode<T> newNode = new MyNode<T>();
+		newNode.set(in);
+		tail->setPrev(newNode);
+		isize += 1;
 	}
 
 	void removeFromTail()
 	{
+		MyNode<T> temp = tail->getPrev()->getPrev();
+		tail->setPrev(temp);
+		isize -= 1;
 	}
 };
