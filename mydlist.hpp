@@ -34,7 +34,7 @@ public:
 
 	~MyDoublyLinkedList()
 	{
-		while(!this->empty()) removeFromHead();
+		while(!this->isEmpty()) removeFromHead();
 	}
 
 	bool isEmpty()
@@ -61,35 +61,39 @@ public:
 
 	void addToHead(T* in)
 	{
-		Mynode<T>* newNode = new mynode<T>();
+		MyNode<T>* newNode = new myNode<T>();
 		newNode->set(in);
 		newNode->setNext(this->head);
 		this->head->setPrev(newNode);
 		this->head = newNode;
+		isize++;
 
 	}
 
 	void removeFromHead()
 	{
-		Mynode<T>* temp = this->head;
+		MyNode<T>* temp = this->head;
 		this->head = this->head->getNext();
 		delete temp;
+		isize--;
 	}
 
 
 	void addToTail(T* in)
 	{
-		Mynode<T>* newNode = new mynode<T>();
+		MyNode<T>* newNode = new myNode<T>();
 		newNode->set(in);
 		newNode->setPrev(this->tail);
 		this->tail->setPrev(newNode);
 		this->tail = newNode;
+		isize++;
 	}
 
 	void removeFromTail()
 	{
-		Mynode<t>* temp = this->tail;
+		MyNode<t>* temp = this->tail;
 		this->tail = this->tail.getPrev();
 		delete temp;
+		isize--;
 	}
 };
