@@ -92,7 +92,7 @@ public:
 	void removeFromTail()
 	{
 		MyNode<t>* temp = this->tail;
-		this->tail = this->tail.getPrev();
+		this->tail = this->tail->getPrev();
 		delete temp;
 		isize--;
 	}
