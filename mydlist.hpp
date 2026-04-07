@@ -23,7 +23,7 @@ class MyDoublyLinkedList
 private:
 	MyNode<T>* head;  // sentinel
 	MyNode<T>* tail;  // sentinel
-	int isize;
+	int size;
 
 public:
 	MyDoublyLinkedList()
@@ -32,7 +32,7 @@ public:
 		tail = new MyNode<T>();
 		head->setNext(tail);
 		tail->setPrev(head);
-		isize = 0;
+		size = 0;
 
 	}
 
@@ -48,12 +48,12 @@ public:
 
 	bool isEmpty()
 	{
-		return isize == 0;
+		return size == 0;
 	}
 
 	int getSize()
 	{
-		return isize;
+		return size;
 	}
 
 
@@ -75,7 +75,7 @@ public:
 		newNode->setPrev(head);
 		head->getNext()->setPrev(newNode);
 		head->setNext(newNode);
-		isize++;
+		size++;
 	}
 
 	void removeFromHead()
@@ -86,7 +86,7 @@ public:
 			head->setNext(nodeToRemove->getNext());
 			nodeToRemove->getNext()->setPrev(head);
 			delete nodeToRemove;
-			isize--;
+			size--;
 		}
 	}
 
@@ -99,7 +99,7 @@ public:
 		newNode->setPrev(tail->getPrev());
 		tail->getPrev()->setNext(newNode);
 		tail->setPrev(newNode);
-		isize++;
+		size++;
 	}
 
 	void removeFromTail()
@@ -110,7 +110,7 @@ public:
 			tail->setPrev(nodeToRemove->getPrev());
 			nodeToRemove->getPrev()->setNext(tail);
 			delete nodeToRemove;
-			isize--;
+			size--;
 		}
 	}
 };
