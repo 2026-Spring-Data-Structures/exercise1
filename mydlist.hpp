@@ -91,7 +91,7 @@ public:
 
 	void removeFromTail()
 	{
-		MyNode<t>* temp = this->tail;
+		MyNode<T>* temp = this->tail;
 		this->tail = this->tail->getPrev();
 		delete temp;
 		isize--;
