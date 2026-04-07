@@ -28,6 +28,8 @@ private:
 public:
 	MyDoublyLinkedList()
 	{
+		this->head = new MyNode<T>();
+		this->tail = new MyNode<T>();
 	}
 
 	~MyDoublyLinkedList()
