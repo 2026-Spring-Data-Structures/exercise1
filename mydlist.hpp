@@ -103,8 +103,6 @@ public:
         if (this->isEmpty()) {
             this->head = newNode;
             this->tail = newNode;
-            newNode->setPrev(NULL);
-            newNode->setNext(NULL);
             isize++;
             return;
         }
